@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreatorVibes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #2d2a4a; /* Deep Purple */
+      color: #f0f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #393666;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #a1e887;
+      margin-bottom: 20px;
+    }
+
+    textarea, button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 80px;
+      background-color: #d1cfff;
+      color: #2d2a4a;
+    }
+
+    button {
+      background-color: #a1e887;
+      color: #2d2a4a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #89c76e;
+    }
+
+    .results {
+      margin-top: 20px;
+    }
+
+    iframe {
+      margin-top: 10px;
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CreatorVibes</h1>
+    <label for="vibe-input">Tell us about your vibe:</label>
+    <textarea id="vibe-input" placeholder="e.g., I want something fashionable"></textarea>
+    <button onclick="getRecommendations()">Find Tracks</button>
+    <div class="results" id="results">
+      <!-- Track results will appear here -->
+    </div>
+  </div>
+
+  <script>
+    function getRecommendations() {
+      const vibeText = document.getElementById("vibe-input").value.toLowerCase();
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = ""; // Clear previous results
+
+      // Your YouTube video embed
+      const tracks = {
+        fashionable: {
+          title: "Big Future",
+          artist: "Obliques",
+          youtubeEmbed: `<iframe src="https://www.youtube.com/embed/aQyZ4eP8pww" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+        }
+      };
+
+      // Match the vibe
+      if (vibeText.includes("fashionable")) {
+        const track = tracks.fashionable;
+
+        const trackDiv = document.createElement("div");
+        trackDiv.innerHTML = `
+          <h3>${track.title} - ${track.artist}</h3>
+          ${track.youtubeEmbed}
+        `;
+        resultsDiv.appendChild(trackDiv);
+      } else {
+        resultsDiv.innerHTML = `<p style="color: #d1cfff;">Sorry, we couldn't match your vibe. Try another description like 'fashionable'.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
